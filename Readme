@@ -1,5 +1,6 @@
 
 The main objective of this assignment is to build a book recommendation for a given dataset. We need to predict the rating of the test dataset which has a set of combinations of userID and bookID based on their past book rating.
+
 Exploratory Data Analysis: The dataset has a total of 700000 book ratings records given by 35280 number of users for 42581 number of books. Ratings can be within the range of 0 to 5. 0 rating indicates that the user has not rated that particular book. 239522 books are rated as 0. The number of books rated as 1 are 4448, the number of books rated as 2 are 20837, the number of books rated as 3 are 105120, the number of books rated as 4 are 160393, and the number of books rated as 5 are 169680. Since the highest number of ratings in the dataset are 0, the resultant user-item matrix will be a sparse matrix.
 The test set contains140000 userID and bookID combinations for which rating needs to be predicted.
 
