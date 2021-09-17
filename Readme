@@ -1,1 +1,34 @@
+
 The main objective of this assignment is to build a book recommendation for a given dataset. We need to predict the rating of the test dataset which has a set of combinations of userID and bookID based on their past book rating.
+Exploratory Data Analysis: The dataset has a total of 700000 book ratings records given by 35280 number of users for 42581 number of books. Ratings can be within the range of 0 to 5. 0 rating indicates that the user has not rated that particular book. 239522 books are rated as 0. The number of books rated as 1 are 4448, the number of books rated as 2 are 20837, the number of books rated as 3 are 105120, the number of books rated as 4 are 160393, and the number of books rated as 5 are 169680. Since the highest number of ratings in the dataset are 0, the resultant user-item matrix will be a sparse matrix.
+The test set contains140000 userID and bookID combinations for which rating needs to be predicted.
+
+
+Data Preprocessing: The dataset contains three columns user_Id, book_Id, and rating.
+1. I checked the data for any null or invalid data, but the data is clean, and there were no invalid data or null data in the dataset.
+2. I have removed removing the duplicate data from the dataset.
+
+
+Approach: I have used the surprise library to build the recommendation system. Surprise library is a python library scikit for analyzing recommender system, which deals with the explicit rating of the users. The surprise library has many in-build prediction algorithms that can be used to predict the users' ratings for any particular book. As part of this assignment, I got the best result for the SVD model.
+Below are steps followed for train the model:
+1. Reading train.csv file.
+2. Splitting the data into train and validation, with the split percentage as 0.25 percentage.
+3. Also, I Tried using cross-validation methods with the k_fold values as 3 or 5.
+4. Once the model was built, training the best model on the full dataset.
+5. Reading the test.csv file.
+6. Predicting rating for every userID and BookID combination.
+7. Writing the prediction in csv file.
+
+
+Below are the steps followed before choosing my final model.
+1. I Started with the KNNBasic model. It took a long time to train on the given set of data, and I got an RMSE on validation data as 1.66 with a K value of 10.
+2. Next, I tried with SVD model with not parameters and 20 epochs, and I got an RMSE of 1.63 on the test dataset.
+3. I followed steps from [1] to check for the best model in the surprise library. SVD algorithm for the given book dataset gave the best results than other algorithms. The below tables compare each model based on test_rmse, fit_time, and test_time.
+4. Since SVD had the test_rmse score, I chose SVD as my final model. With various trials with the regularization parameter, learning rate, n_factors and epoch values, I got the best results for the following parameters.
+      Hyperparameter       Values     
+      reg_all              0.125
+      epochs               100
+      n_factors            150
+
+Evaluation Metrics:
+The Results are evaluated based on RMSE metrics. RMSE stands for Root Mean Square Error, which is the square root of the variance of the residual. It indicates the absolute fit of the model to the data, i.e., how close the observed data points are to the model’s predicted values. I have obtained a max RMSE score of 1.53053.
